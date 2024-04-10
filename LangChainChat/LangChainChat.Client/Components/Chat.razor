@@ -1,0 +1,100 @@
+﻿@using LangChainChat.Client.Model
+@inject NavigationManager navigationManager
+@inject AppState AppState
+<div class="chat-pannel">
+    <div class="chat">
+        @foreach (var message in AppState.Messages)
+        {
+            <MessageComponent Name="@message.DisplayName" Content="@message.Content"/>
+        }
+        @if (_error != null)
+        {
+            <div class="chat-message">
+                <div class="chat-message-body">
+                    <div class="chat-message-error">
+                        @_error
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+    <div class="chat-input-pannel">
+        <div class="chat-input-form">
+            <textarea @ref="_inputTextArea" @onkeypress:preventDefault="@_isPreventDefault" @onkeypress="KeyPress" @bind="_message" @bind:event="oninput" class="chat-input" placeholder="Message..." style="height:24px">@_message</textarea>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private bool _isPreventDefault;
+    private ElementReference _inputTextArea;
+    string? _error = null;
+    
+    string _message = "";
+
+    private async Task KeyPress(KeyboardEventArgs obj)
+    {
+        this._isPreventDefault = false;
+        
+        if (obj is { Key: "Enter", ShiftKey: true }) return;
+
+        if (obj is not { Key: "Enter" }) return;
+
+        this._isPreventDefault = true;
+        if (string.IsNullOrWhiteSpace(_message)) return;
+
+
+
+        AppState.Messages.Add(new Message {DisplayName = "You", Content = _message});
+        var toSend = _message;
+        _message = "";
+        try
+        {
+            var answer = await AppState.PostMessage(toSend);
+            AppState.Messages.Add(new Message { DisplayName = answer.Author, Content = answer.Content });
+            navigationManager.NavigateTo("/" + AppState.SelectedModel + "/" + AppState.ConversationId.Value);
+            
+        }
+        catch (Exception e)
+        {
+            _error = e.Message;
+        }
+        StateHasChanged();
+        
+    }
+
+    bool initialized = false;
+    protected override void OnInitialized()
+    {
+        initialized = true;
+
+    }
+
+    
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            _inputTextArea.FocusAsync();
+        }
+    }
+
+    private async Task RefreshMessages()
+    {
+        AppState.Messages.Clear();
+        StateHasChanged();
+        await AppState.ReloadMessages();
+        StateHasChanged();
+    }
+
+
+    public void Refresh()
+    {
+        if (initialized)
+            StateHasChanged();
+    }
+
+}

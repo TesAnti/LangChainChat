@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "prism@9000.0.1",
+      "destination": "wwwroot/lib/prism/",
+      "files": [
+        "prism.min.js",
+        "themes/prism.min.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "prism@9000.0.1",
+      "destination": "wwwroot/lib/prism/",
+      "files": [
+        "prism.min.js",
+        "themes/prism-coy.css",
+        "themes/prism-coy.min.css",
+        "themes/prism-dark.css",
+        "themes/prism-dark.min.css",
+        "themes/prism-funky.css",
+        "themes/prism-funky.min.css",
+        "themes/prism-okaidia.css",
+        "themes/prism-okaidia.min.css",
+        "themes/prism-tomorrow.css",
+        "themes/prism-tomorrow.min.css",
+        "themes/prism-twilight.css",
+        "themes/prism-twilight.min.css",
+        "themes/prism.css",
+        "themes/prism.min.css"
+      ]
+    }
+  ,
+{
+  "provider": "cdnjs",
+  "library": "prism-themes@1.9.0",
+  "destination": "wwwroot/lib/prism-themes/"
+}
+]
+}

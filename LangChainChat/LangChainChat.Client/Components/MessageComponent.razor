@@ -1,0 +1,23 @@
+﻿@using Markdig
+@inject MarkdownPipeline pipeline
+<div class="chat-message">
+    <div class="chat-message-body">
+        <div class="chat-message-author">@Name</div>
+        <div class="chat-message-content">@((MarkupString)ContentHTML)</div>
+        
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+    [Parameter]
+    public string Content { get; set; }
+    public string ContentHTML { get; set; }
+
+    protected override void OnInitialized()
+    {
+        
+        ContentHTML = Markdown.ToHtml(Content, pipeline);
+    }
+}

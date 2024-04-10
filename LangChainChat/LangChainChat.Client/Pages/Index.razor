@@ -1,0 +1,87 @@
+﻿@page "/"
+@page "/{SelectedModel}"
+@page "/{SelectedModel}/{ConversationId:guid}"
+@using LangChainChat.Client.Components
+@using LangChainChat.Client.Model
+
+@inject AppState AppState
+@inject NavigationManager NavigationManager
+
+<div class="container">
+    <div class="side-panel">
+        <div class="side-panel-topic">Models</div>
+        
+        @foreach (var model in AppState.AvailableModels)
+        {
+            <div class="side-panel-item-container">
+                <a class="side-panel-item" @onclick='()=>NavigationManager.NavigateTo("/"+model,true)' href="#">@model</a>
+            </div>
+        }
+        
+        <div style="height:26px;"></div>
+        <div class="side-panel-topic">History</div>
+        
+        @foreach (var conversation in AppState.History)
+        {
+            <div class="side-panel-item-container">
+                <a class="side-panel-item" @onclick='()=>NavigationManager.NavigateTo("/"+conversation.ModelName+"/"+conversation.ConversationId,true)' href="#">@conversation.ConversationName</a>
+            </div>
+        }
+        
+    </div>
+
+    @if (showChat)
+    {
+        <Chat @ref="chat" />
+    }
+    else
+    {
+        <div class="chat-pannel">
+            <div class="chat">
+                <div class="chat-message">
+                    <div class="chat-message-body">
+                        <div class="chat-message-info">
+                            Please select a model or a conversation
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code
+{
+    
+    Chat chat=new Chat();
+    bool showChat = false;
+    [Parameter]
+    public string? SelectedModel { get; set; }
+    [Parameter]
+    public Guid? ConversationId { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+
+        await AppState.LoadModels();
+        await AppState.ReloadConversations();
+
+        StateHasChanged();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        AppState.SelectedModel = SelectedModel;
+        AppState.ConversationId = ConversationId;
+        
+        if (AppState.SelectedModel != null)
+        {
+            showChat = true;
+            await AppState.ReloadMessages();
+            chat.Refresh();
+        }
+        StateHasChanged();
+        
+    }
+
+}

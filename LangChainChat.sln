@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangChainChat", "LangChainChat\LangChainChat\LangChainChat.csproj", "{0645AAE8-740A-4018-B0CB-8741EFFAD51F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangChainChat.Client", "LangChainChat\LangChainChat.Client\LangChainChat.Client.csproj", "{82F22A59-F1F0-488E-A071-B0838E98766F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0645AAE8-740A-4018-B0CB-8741EFFAD51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0645AAE8-740A-4018-B0CB-8741EFFAD51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0645AAE8-740A-4018-B0CB-8741EFFAD51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0645AAE8-740A-4018-B0CB-8741EFFAD51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F22A59-F1F0-488E-A071-B0838E98766F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F22A59-F1F0-488E-A071-B0838E98766F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F22A59-F1F0-488E-A071-B0838E98766F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F22A59-F1F0-488E-A071-B0838E98766F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47E02F34-16DB-44E5-A2A2-72D6BA200D8E}
+	EndGlobalSection
+EndGlobal
