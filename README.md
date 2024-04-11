@@ -19,7 +19,13 @@ docker exec -it ollama ollama pull mistral:latest
 ```
 This will take some minutes, depending on your internet speed.
 
-Now just clone the project and run it.
+Now clone the project into any folder you like:
+
+```
+git clone https://github.com/TesAnti/LangChainChat.git
+```
+Run it with editor of your choise.
+
 
 # Configuration
 Just clone the project and open `LangChainConfigExtensions.cs` file.
