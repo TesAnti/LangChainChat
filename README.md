@@ -10,7 +10,7 @@ This project shows how to make a chat with LLM usgin [LangChain](https://github.
 - automatic conversation name generation
 - code syntax higlight
 
-# Prerequisites
+# Installation
 To run the chat with default configuration you would need `docker` and [ollama container](https://hub.docker.com/r/ollama/ollama).
 Follow the installation steps for ollama container.
 When eterything is ready, pull the latest mistral model:
@@ -18,6 +18,7 @@ When eterything is ready, pull the latest mistral model:
 docker exec -it ollama ollama pull mistral:latest
 ```
 This will take some minutes, depending on your internet speed.
+
 Now just clone the project and run it.
 
 # Configuration
